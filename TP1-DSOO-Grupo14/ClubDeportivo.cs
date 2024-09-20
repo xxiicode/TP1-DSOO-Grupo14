@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace TP1_DSOO_Grupo14
 {
     // Clase ClubDeportivo
@@ -65,14 +66,24 @@ namespace TP1_DSOO_Grupo14
         }
 
         // Metodo para inscribir un socio en una actividad
-        public void InscribirSocioEnActividad(Socio socio, Actividad actividad)
+        public void InscribirSocioEnActividad(string nombreActividad, int socioId)
         {
-            // Verifica que la actividad exista
-            if (!actividades.Any(a => a.Nombre == actividad.Nombre))
+            // Busca la actividad y verifica que exista
+            Actividad? actividad = Actividades.FirstOrDefault(a => a.Nombre == nombreActividad);
+            if (actividad == null)
             {
                 Console.WriteLine("ACTIVIDAD INEXISTENTE");
                 return;
             }
+
+            // Busca el socio y verifica que exista
+            Socio? socio = Socios.FirstOrDefault(s => s.SocioId == socioId);
+            if (socio == null)
+            {
+                Console.WriteLine("SOCIO INEXISTENTE");
+                return;
+            }
+
 
             // Verifica si hay cupo en la actividad
             if (!actividad.HayCupoDisponible())
@@ -81,11 +92,7 @@ namespace TP1_DSOO_Grupo14
                 return;
             }
             // Verifica si el socio existe
-            if (!Socios.Any(s => s.SocioId == socio.SocioId))
-            {
-                Console.WriteLine("SOCIO INEXISTENTE");
-                return;
-            }
+
 
             // Verifica que el socio no este inscripto en la actividad
             if (actividad.SociosInscriptos.Any(s => s.SocioId == socio.SocioId))
@@ -104,7 +111,7 @@ namespace TP1_DSOO_Grupo14
             // Inscribe al socio     
             actividad.SociosInscriptos.Add(socio);
             socio.ActividadesInscriptas.Add(actividad);
-            Console.WriteLine($"INSCRIPCIÓN EXITOSA, el socio {socio.Nombre} fue inscripto en {actividad.Nombre}.");
+            Console.WriteLine($"INSCRIPCIÓN EXITOSA, el socio {socio.NombreCompleto()} fue inscripto en {actividad.Nombre}.");
         }
         // Metodo para ver todas las actividades
         public void VerActividades()
