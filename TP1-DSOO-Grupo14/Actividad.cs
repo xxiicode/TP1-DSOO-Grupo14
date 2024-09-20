@@ -60,7 +60,7 @@ namespace TP1_DSOO_Grupo14
             return sociosInscriptos.Contains(socio);
         }
 
-        // Metodo para saber si hay cupos disponibles
+        // Metodo para saber los cupos disponibles
         public int CuposDisponibles()
         {
             return cupo - sociosInscriptos.Count;
@@ -69,8 +69,6 @@ namespace TP1_DSOO_Grupo14
         // Metodo para ver los socios inscriptos en una actividad
         public void VerSociosInscriptos()
         {
-            // Primero te dice cuantos socios hay inscriptos
-            Console.WriteLine("Cantidad de socios inscriptos: " + sociosInscriptos.Count);
             // Luego te muestra los nombres y apellidos de los socios inscriptos
             if (sociosInscriptos.Count == 0)
             {
@@ -78,6 +76,11 @@ namespace TP1_DSOO_Grupo14
                 return;
             }
 
+            // Primero te dice cuantos socios hay inscriptos
+
+            Console.WriteLine($"Cantidad de socios inscriptos en {nombre}: {sociosInscriptos.Count}");
+
+            // Segundo te muestra la lista de Socios inscriptos
             foreach (Socio s in sociosInscriptos)
             {
                 Console.WriteLine("Nombre: " + s.Nombre + " Apellido: " + s.Apellido);

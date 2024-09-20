@@ -14,9 +14,15 @@
             club14.AgregarActividad("Tenis", 3, 5);
 
             // Agregar socios al club
-            club14.AgregarSocio("Lean", "Bilokapic", 1);
-            club14.AgregarSocio("Martin", "Ferroviario", 2);
-            club14.AgregarSocio("Guido", "Alimenticio", 3);
+            club14.AltaSocio("Lean", "Bilokapic", 1);
+            club14.AltaSocio("Martin", "Ferroviario", 2);
+            club14.AltaSocio("Guido", "Alimenticio", 3);
+            club14.AltaSocio("Yoel", "Administrativo", 4);
+
+            // Ver todas las actividades para confirmar que fueron agregadas
+            club14.VerActividades();
+
+
 
             // Inscribir socios en actividades
             club14.InscribirSocioEnActividad() //... Me clave aca.No se como seguir.

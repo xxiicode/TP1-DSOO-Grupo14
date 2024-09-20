@@ -52,7 +52,7 @@ namespace TP1_DSOO_Grupo14
         }
 
         // Metodo para agregar un socio a la lista de socios
-        public void AgregarSocio(string nombre, string apellido, int socioId)
+        public void AltaSocio(string nombre, string apellido, int socioId)
         {
             if (socios.Any(s => s.SocioId == socioId))
             {
@@ -67,26 +67,46 @@ namespace TP1_DSOO_Grupo14
         // Metodo para inscribir un socio en una actividad
         public void InscribirSocioEnActividad(Socio socio, Actividad actividad)
         {
-            if (actividad.HayCupoDisponible() && !actividad.SocioInscripto(socio) && socio.ActividadesInscriptas.Count < 3)
+            // Verifica que la actividad exista
+            if (!actividades.Any(a => a.Nombre == actividad.Nombre))
             {
-                actividad.SociosInscriptos.Add(socio);
-                socio.ActividadesInscriptas.Add(actividad);
+                Console.WriteLine("ACTIVIDAD INEXISTENTE");
+                return;
             }
-            else if (socio.ActividadesInscriptas.Count >= 3)
-            {
-                Console.WriteLine($"El socio {socio.Nombre} ya está inscripto en el máximo de actividades permitidas.");
-            }
-            else if (!actividad.HayCupoDisponible())
+
+            // Verifica si hay cupo en la actividad
+            if (!actividad.HayCupoDisponible())
             {
                 Console.WriteLine($"No hay cupo disponible en la actividad {actividad.Nombre}.");
+                return;
             }
-            else
+            // Verifica si el socio existe
+            if (!Socios.Any(s => s.SocioId == socio.SocioId))
+            {
+                Console.WriteLine("SOCIO INEXISTENTE");
+                return;
+            }
+
+            // Verifica que el socio no este inscripto en la actividad
+            if (actividad.SociosInscriptos.Any(s => s.SocioId == socio.SocioId))
             {
                 Console.WriteLine($"El socio {socio.Nombre} ya está inscripto en la actividad {actividad.Nombre}.");
+                return;
             }
-        }
 
-        // Metodo para ver todas cantidad y datos de las actividades
+            // Verifica que el socio no llegue al tope de actividades inscriptas
+            if (socio.ActividadesInscriptas.Count >= 3)
+            {
+                Console.WriteLine($"TOPE DE ACTIVIDADES ALCANZADO, el socio {socio.Nombre} ya está inscripto en el máximo de actividades permitidas.");
+                return;
+            }
+
+            // Inscribe al socio     
+            actividad.SociosInscriptos.Add(socio);
+            socio.ActividadesInscriptas.Add(actividad);
+            Console.WriteLine($"INSCRIPCIÓN EXITOSA, el socio {socio.Nombre} fue inscripto en {actividad.Nombre}.");
+        }
+        // Metodo para ver todas las actividades
         public void VerActividades()
         {
             Console.WriteLine("Cantidad de actividades: " + actividades.Count);
