@@ -18,10 +18,10 @@ namespace TP1_DSOO_Grupo14
         private List<Socio> sociosInscriptos = new List<Socio>();
 
         // Constructor de la clase Actividad
-        public Actividad(string nombre, int activididId, int cupo)
+        public Actividad(string nombre, int actividadId, int cupo)
         {
             this.nombre = nombre;
-            this.actividadId = activididId;
+            this.actividadId = actividadId;
             this.cupo = cupo;
         }
 
