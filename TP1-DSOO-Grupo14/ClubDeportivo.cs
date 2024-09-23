@@ -69,7 +69,7 @@ namespace TP1_DSOO_Grupo14
         public void InscribirSocioEnActividad(string nombreActividad, int socioId)
         {
             // Busca la actividad y verifica que exista
-            Actividad? actividad = Actividades.FirstOrDefault(a => a.Nombre == nombreActividad);
+            Actividad? actividad = Actividades.Find(a => a.Nombre == nombreActividad);
             if (actividad == null)
             {
                 Console.WriteLine("ACTIVIDAD INEXISTENTE");
@@ -77,7 +77,7 @@ namespace TP1_DSOO_Grupo14
             }
 
             // Busca el socio y verifica que exista
-            Socio? socio = Socios.FirstOrDefault(s => s.SocioId == socioId);
+            Socio? socio = Socios.Find(s => s.SocioId == socioId);
             if (socio == null)
             {
                 Console.WriteLine("SOCIO INEXISTENTE");
